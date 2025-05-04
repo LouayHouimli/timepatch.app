@@ -17,10 +17,7 @@ export const createAuth = (env: Bindings) => {
       enabled: true,
     },
     trustedOrigins: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://localhost:8787",
-      env.CORS_ORIGIN ? `https://${env.CORS_ORIGIN}` : "https://louli.tech",
+      env.CORS_ORIGIN ? env.CORS_ORIGIN : "http://localhost:3001",
     ],
   });
 };
