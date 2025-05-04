@@ -17,6 +17,7 @@ app.use("/*", (c, next) => {
       c.env.CORS_ORIGIN ? `https://${c.env.CORS_ORIGIN}` : "https://louli.tech",
       "http://localhost:8787",
       "http://localhost:3000",
+      "http://localhost:3001",
     ],
     allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
