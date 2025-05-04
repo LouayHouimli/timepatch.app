@@ -2,7 +2,7 @@ import { protectedProcedure, publicProcedure, router } from "../lib/trpc";
 
 export const appRouter = router({
 	healthCheck: publicProcedure.query(() => {
-		return "OK";
+		return "TimePatch API is healthy";
 	}),
 	privateData: protectedProcedure.query(({ ctx }) => {
 		return {
