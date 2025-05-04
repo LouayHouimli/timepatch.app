@@ -7,15 +7,15 @@ import * as schema from "../db/schema/auth";
 import type { Bindings } from "../../types/bindings";
 
 export const createAuth = (env: Bindings) => {
-	const db = getDB(env); // create db per request
-	return betterAuth({
-		database: drizzleAdapter(db, {
-			provider: "sqlite",
-			schema: schema,
-		}),
-		emailAndPassword: {
-			enabled: true,
-		},
-		trustedOrigins: [env.CORS_ORIGIN],
-	});
+  const db = getDB(env); // create db per request
+  return betterAuth({
+    database: drizzleAdapter(db, {
+      provider: "sqlite",
+      schema: schema,
+    }),
+    emailAndPassword: {
+      enabled: true,
+    },
+    trustedOrigins: [`https://${env.CORS_ORIGIN}`],
+  });
 };
