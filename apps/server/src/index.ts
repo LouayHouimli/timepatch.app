@@ -15,7 +15,7 @@ app.use("/*", (c, next) => {
   return cors({
     origin: [
       c.env.CORS_ORIGIN ? c.env.CORS_ORIGIN : "https://louli.tech",
-      "http://localhost:8787",
+
       "http://localhost:3000",
       "http://localhost:3001",
     ],
