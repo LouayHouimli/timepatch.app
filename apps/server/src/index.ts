@@ -7,6 +7,7 @@ import type { Bindings } from "../types/bindings";
 import { createAuth } from "./lib/auth";
 import { createContext } from "./lib/context";
 import { appRouter } from "./routers/index";
+import type { MiddlewareHandler } from "hono";
 
 const app = new Hono<{ Bindings: Bindings }>();
 
@@ -20,10 +21,24 @@ app.use("/*", (c, next) => {
       "http://localhost:3001",
     ],
     allowMethods: ["GET", "POST", "OPTIONS"],
-    allowHeaders: ["Content-Type", "Authorization"],
+    allowHeaders: ["Content-Type", "Authorization", "x-api-key"],
     credentials: true,
   })(c, next);
 });
+
+const apiKeyMiddleware: MiddlewareHandler<{ Bindings: Bindings }> = async (
+  c,
+  next
+) => {
+  const apiKey = c.req.header("x-api-key");
+  const expectedApiKey = c.env.API_KEY;
+
+  if (!apiKey || apiKey !== expectedApiKey) {
+    return c.json({ error: "Unauthorized - Invalid API Key" }, 401);
+  }
+
+  await next();
+};
 
 app.on(["POST", "GET"], "/api/auth/**", (c) => {
   const auth = createAuth(c.env);
@@ -32,6 +47,7 @@ app.on(["POST", "GET"], "/api/auth/**", (c) => {
 
 app.use(
   "/trpc/*",
+  apiKeyMiddleware,
   trpcServer({
     router: appRouter,
     createContext: (_opts, context) => {
