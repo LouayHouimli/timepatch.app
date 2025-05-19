@@ -32,6 +32,8 @@ export const createAuth = (env: Bindings) => {
     },
     trustedOrigins: [
       env.CORS_ORIGIN ? env.CORS_ORIGIN : "http://localhost:3001",
+      "http://localhost:8081",
+      "exp://192.168.1.21:8081",
     ],
   });
 };

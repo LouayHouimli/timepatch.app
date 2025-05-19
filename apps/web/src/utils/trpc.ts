@@ -32,7 +32,6 @@ const trpcClient = createTRPCClient<AppRouter>({
       url: `${process.env.NEXT_PUBLIC_SERVER_URL}/trpc`,
       fetch(url, options) {
         const headers = new Headers(options?.headers);
-        headers.set("x-api-key", env.NEXT_PUBLIC_API_KEY || "");
         return fetch(url, {
           ...options,
           credentials: "include",

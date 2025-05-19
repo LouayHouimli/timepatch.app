@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../index.css";
+
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 
@@ -14,6 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata: Metadata = {
+  title: "TimePatch",
+  description: "TimePatch",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,6 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
+          <Header />
           <div className="grid h-svh grid-rows-[auto_1fr]">{children}</div>
         </Providers>
       </body>

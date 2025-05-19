@@ -89,7 +89,7 @@ export const aiRouter = router({
         `;
 
       const { text } = await generateText({
-        model: google("gemini-1.5-pro-latest"),
+        model: google("gemini-1.5-flash"),
         system: systemPrompt,
         prompt: userPrompt,
       });
