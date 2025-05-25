@@ -1,39 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-  title: "TimePatch",
-  description: "TimePatch",
+  title: "TimePatch - Smart Time Management for Modern Teams",
+  description:
+    "Streamline your workflow with AI-powered task suggestions, adaptive scheduling, and intelligent time management. Built for the way you actually work.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
-export default function RootLayout({
+export default function PromotingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers>
-          <Header />
-          <div className="grid h-svh grid-rows-[auto_1fr]">{children}</div>
-        </Providers>
-      </body>
-    </html>
+    <>
+      <Header />
+      <main className="flex-1 flex flex-col">{children}</main>
+    </>
   );
 }

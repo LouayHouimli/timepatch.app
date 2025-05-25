@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "../index.css";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const metadata: Metadata = {
+  title: "TimePatch - Smart Time Management for Modern Teams",
+  description:
+    "Streamline your workflow with AI-powered task suggestions, adaptive scheduling, and intelligent time management. Built for the way you actually work.",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -20,12 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} font-sans antialiased bg-white dark:bg-black text-gray-900 dark:text-white selection:bg-primary/10 selection:text-primary min-h-screen`}
       >
         <Providers>
-          <div className="grid h-svh grid-rows-[auto_1fr]">{children}</div>
+          <div className="flex min-h-screen flex-col">{children}</div>
         </Providers>
       </body>
     </html>
