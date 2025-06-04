@@ -1,4 +1,3 @@
-import { Button } from "@client/components/ui/button";
 import { trpc } from "@client/lib/trpc-client";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
@@ -8,15 +7,13 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  const healthCheck = useQuery(trpc.healthCheck.queryOptions());
+  const user = useQuery(trpc.user.getProfile.queryOptions());
+  const firstName = user.data?.name.split(" ")[0];
 
-  const user = healthCheck.data;
   return (
-    <div>
-      Hello from TimePatch {user}
-      <Button variant="default" onClick={() => console.log("Clicked")}>
-        Click me
-      </Button>
+    <div className="flex items-center justify-center mx-auto">
+      Hello to TimePatch :  {firstName ? firstName : "Guest"}
+
     </div>
   );
 }
